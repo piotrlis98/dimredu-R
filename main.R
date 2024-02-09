@@ -217,14 +217,16 @@ boxplot_overall <- ggplot(data = combined_data %>%
   scale_y_reverse() +
   theme(
     plot.title = element_text(size = 14, hjust = 0.5),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 15), # Zwiększony rozmiar czcionki dla nazw metod
+    axis.text.y = element_text(size = 15), # Zwiększony rozmiar czcionki dla wartości na osi Y
+    axis.title.y = element_text(size = 15, vjust = 0.5), # Zwiększony rozmiar czcionki dla etykiety "Ranga"
     text = element_text(size = 10),
     legend.position = 'none',
     panel.spacing = unit(1, "lines"),
     panel.border = element_rect(colour = "grey50", fill = NA, size = 1),
-    axis.title.x = element_text(size = 10),
-    axis.title.y = element_text(size = 10)
+    axis.title.x = element_text(size = 10)
   )
+
 
 # Zapisanie wykresu do pliku SVG
 ggsave("boxplot.svg", plot = boxplot_overall, width = 8, height = 6, units = "in")
@@ -336,21 +338,3 @@ rownames(medians_per_method_transposed) <- "Mediana"
 pivot_table_dataset_sorted <- rbind(pivot_table_dataset_sorted[1:(nrow(pivot_table_dataset_sorted)-1), ],  # wszystko oprócz ostatniego wiersza
                                     medians_per_method_transposed,
                                     pivot_table_dataset_sorted[nrow(pivot_table_dataset_sorted), ])  # ostatni wiersz
-
-
-
-
-
-
-# # Przekształć ramkę danych medians_per_classifier
-# medians_per_classifier["Średnia", ] <- "-"
-
-# 
-# # Ustaw nazwy kolumn na "Mediana"
-# colnames(medians_per_classifier) <- "Mediana"
-# 
-# 
-# # Dodaj mediany do pivot_table_classifier_sorted
-# pivot_table_classifier_sorted <- cbind(pivot_table_classifier_sorted, medians_per_classifier)
-
-
